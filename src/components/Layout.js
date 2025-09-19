@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import Navigation from './Navigation';
 import Footer from './Footer';
-
+ 
 
 const Layout = ({ children, title = "Studio Miyawaki - Digital Craftsmanship" }) => {
   // Use a state that checks sessionStorage first
