@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const About = () => {
-  // Set the first team member as active by default for a more engaging initial view
   const [activeTeamMember, setActiveTeamMember] = useState(0);
 
   const teamMembers = [
@@ -13,18 +12,20 @@ const About = () => {
   ];
 
   return (
-    <section
-      id="about"
-      style={{ 
-      backgroundImage: `url('/images/aboutUs.jpg')`, 
-      backgroundSize: 'cover', 
-      backgroundPosition: 'center', 
-      backgroundRepeat: 'no-repeat' 
-      }}
-      className="relative py-40 min-h-screen overflow-hidden bg-gradient-to-b from-black/10 via-rose-100/20 to-stone-50/10"
-    >
-      <div className="relative z-10 max-w-7xl mx-auto px-8 sm:px-12 lg:px-16">
-        {/* Section Header */}
+    // The main section is a container for our layers. The base background is now a neutral stone color.
+    <section id="about" className="relative overflow-hidden">
+      
+      <div
+        aria-hidden="true"
+        className="absolute  left-0 right-0 h-[500px] w-full bg-cover bg-center bg-no-repeat pointer-events-none z-20"
+        style={{
+          backgroundImage: `url('/images/roses.png')`,
+        }}
+      />
+
+      <div className="relative z-30 max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 py-40">
+        
+        {/* Section Header (Original code, no changes) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +39,6 @@ const About = () => {
           <h2 className="text-7xl font-light text-stone-900 mb-8 tracking-tight font-playfair">
             Our Philosophy
           </h2>
-          {/* Gold accent divider, consistent with Hero */}
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#c5a572] to-transparent mx-auto mb-12" />
           <p className="text-xl text-stone-600 max-w-5xl mx-auto leading-relaxed font-light">
             Rooted in the Japanese principles of <em className="font-medium text-stone-700">craftsmanship</em>, 
@@ -47,7 +47,7 @@ const About = () => {
           </p>
         </motion.div>
 
-        {/* Philosophy Cards */}
+        {/* Philosophy Cards (Original code, no changes) */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ const About = () => {
           ))}
         </motion.div>
 
-        {/* Interactive Team Section */}
+        {/* Interactive Team Section (Original code, no changes) */}
         <div className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

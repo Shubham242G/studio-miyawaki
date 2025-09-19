@@ -31,7 +31,8 @@ const Services = () => {
   return (
     <motion.div
         initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}
-        style={{ backgroundImage: `url('/images/services.jpg')` }}
+        style={{ backgroundImage: `url('/images/services.jpg')`, 
+        }}      
         className="min-h-screen bg-cover bg-center bg-fixed py-40 px-8 sm:px-12 lg:px-16 relative"
     >
       <div className="absolute inset-0 bg-black/30"></div>

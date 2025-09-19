@@ -5,13 +5,22 @@ import { Helmet } from 'react-helmet-async';
 import Navigation from './Navigation';
 import Footer from './Footer';
 
+
 const Layout = ({ children, title = "Studio Miyawaki - Digital Craftsmanship" }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  // Use a state that checks sessionStorage first
+  const [isLoading, setIsLoading] = useState(() => !sessionStorage.getItem('hasLoaded'));
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+    // If loading is active, set a timer and then update sessionStorage
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        // Set the flag in sessionStorage after the loading animation is complete
+        sessionStorage.setItem('hasLoaded', 'true');
+      }, 2500); // Increased duration slightly for a smoother experience
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -26,7 +35,11 @@ const Layout = ({ children, title = "Studio Miyawaki - Digital Craftsmanship" })
 
       <AnimatePresence mode="wait">
         {isLoading ? (
-          <LoadingScreen key="loading" />
+          // Pass the background image path to the LoadingScreen component
+          <LoadingScreen 
+            key="loading" 
+            backgroundImage="/images/your-loading-background.jpg" // <-- SET YOUR IMAGE PATH HERE
+          />
         ) : (
           <motion.div
             key="content"
@@ -35,12 +48,10 @@ const Layout = ({ children, title = "Studio Miyawaki - Digital Craftsmanship" })
             transition={{ duration: 0.8 }}
             className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-amber-25"
           >
-            {/* Global background video layer */}
             <BackgroundVideo
-              src="/videos/miyawaki.mp4"       // put your public/ video here, e.g. public/video/banner.mp4
-              poster="/images/aboutUs.jpg"   // optional poster for first frame
+              src="/videos/miyawaki.mp4"
+              poster="/images/aboutUs.jpg"
             />
-
             <Navigation />
             <main>{children}</main>
             <Footer />
@@ -51,10 +62,10 @@ const Layout = ({ children, title = "Studio Miyawaki - Digital Craftsmanship" })
   );
 };
 
+// --- (BackgroundVideo component remains unchanged) ---
 const BackgroundVideo = ({ src, poster }) => {
   const videoRef = useRef(null);
-  // 1) Make baseline dim lighter so video is more visible at the top
-  const [dim, setDim] = useState(0.12); 
+  const [dim, setDim] = useState(0.12);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -70,8 +81,7 @@ const BackgroundVideo = ({ src, poster }) => {
     const applyPRM = () => {
       if (mql.matches) {
         try { video.pause(); } catch {}
-        // 2) Keep PRM darker baseline but still a bit lighter than before
-        setDim(0.5); // was 0.65
+        setDim(0.5);
       } else {
         tryPlay();
       }
@@ -87,9 +97,8 @@ const BackgroundVideo = ({ src, poster }) => {
         const threshold = Math.max(window.innerHeight * 0.6, 480);
         const y = window.scrollY || 0;
         const t = Math.min(y / threshold, 1);
-        // 3) Cap the maximum dim much lower to keep video visible as content scrolls
-        const min = mql.matches ? 0.5 : 0.12;   // PRM baseline stays a bit darker
-        const max = mql.matches ? 0.65 : 0.06;  // was 0.75 / 0.6
+        const min = mql.matches ? 0.5 : 0.12;
+        const max = mql.matches ? 0.65 : 0.06;
         setDim(min + (max - min) * t);
         ticking = false;
       });
@@ -105,7 +114,6 @@ const BackgroundVideo = ({ src, poster }) => {
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10">
-      {/* 4) Optional: gentle clarity boost on the video itself */}
       <video
         ref={videoRef}
         className="w-full h-full object-cover filter brightness-110 contrast-110 saturate-110"
@@ -117,32 +125,38 @@ const BackgroundVideo = ({ src, poster }) => {
         playsInline
         preload="metadata"
       />
-      {/* 5) Scrim uses the lighter baseline and lower cap via `dim` */}
       <div className="absolute inset-0 bg-black" style={{ opacity: dim }} />
-      {/* 6) Soften the vertical gradient so it doesn’t over-mask the video */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/25" />
     </div>
   );
 };
 
-const LoadingScreen = () => (
+
+// --- UPDATED LOADING SCREEN COMPONENT ---
+const LoadingScreen = ({ backgroundImage }) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="fixed inset-0 bg-gradient-to-br from-amber-50 to-stone-100 flex items-center justify-center z-50"
+    className="fixed inset-0 flex items-center justify-center z-50 bg-cover bg-center"
+ style={{ backgroundImage: `url('/images/loadingScreen.jpg')` }} // <-- SET YOUR IMAGE PATH HERE
   >
-    <div className="text-center">
+  
+    {/* Dark overlay to ensure text readability */}
+    <div className="absolute inset-0 bg-black/50" />
+    
+    <div className="relative z-10 text-center">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
         className="mb-8"
       >
-        <h1 className="text-4xl font-light text-stone-800 tracking-wider font-playfair">
+        {/* Text color changed to light to contrast with the dark overlay */}
+        <h1 className="text-4xl font-light text-stone-100 tracking-wider font-playfair">
           Studio Miyawaki
         </h1>
-        <div className="w-24 h-px bg-stone-600 mx-auto mt-4" />
+        <div className="w-24 h-px bg-stone-300 mx-auto mt-4" />
       </motion.div>
 
       <motion.div
@@ -156,3 +170,4 @@ const LoadingScreen = () => (
 );
 
 export default Layout;
+

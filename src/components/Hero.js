@@ -49,17 +49,14 @@ const Hero = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover -z-11"
+        className="absolute inset-0 w-full h-full object-cover -z-11 blur-none"
         src="/videos/miyawaki.mp4"
         type="video/mp4"
       />
-      
-      {/* Darkening Overlay */}
-      <div className="absolute inset-0 bg-black/30" />
 
       {/* Seamless transition gradient to next section */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-amber-50/30 via-amber-50/10 to-transparent"
+        className="absolute bottom-0 left-0 right-0 h-1/3 "
         aria-hidden="true"
       />
 
@@ -70,14 +67,14 @@ const Hero = () => {
             x: mousePosition.x * 0.005,
             y: mousePosition.y * 0.005,
           }}
-          className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-amber-100/10 to-stone-100/5 rounded-full blur-3xl"
+          className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full "
         />
         <motion.div
           animate={{
             x: mousePosition.x * -0.002,
             y: mousePosition.y * -0.002,
           }}
-          className="absolute bottom-1/3 left-1/4 w-64 h-64 bg-gradient-to-tr from-stone-200/5 to-amber-200/5 rounded-full blur-2xl"
+          className="absolute bottom-1/3 left-1/4 w-64 h-64 "
         />
       </div>
 
@@ -89,7 +86,7 @@ const Hero = () => {
         className="relative z-10 text-center px-8 sm:px-12 lg:px-16 max-w-6xl mx-auto"
       >
         <motion.div variants={itemVariants} className="mb-[200px]">
-          <span className="text-7xl font-light text-stone-100 tracking-wider font-noto-jp">美</span>
+          <span className="text-7xl font-light text-red-500 tracking-wider font-noto-jp">美</span>
         </motion.div>
         
         {/* Gold accent line */}
