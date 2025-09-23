@@ -20,38 +20,16 @@ const Contact = () => {
   const TEMPLATE_ID = 'your_template_id';
   const USER_ID = 'your_user_id';
 
-  const handleSubmit = async (e) => {
+   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const result = await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          company: formData.company,
-          service: formData.service,
-          message: formData.message,
-          budget: formData.budget,
-        },
-        USER_ID
-      );
-
-      if (result.status === 200) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', company: '', service: '', message: '', budget: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      console.error('Email error:', error);
-      setSubmitStatus('error');
-    }
-
-    setIsSubmitting(false);
-    setTimeout(() => setSubmitStatus(null), 5000);
+    emailjs.sendForm(
+      "service_ypeplcf",
+      "template_2gdcgwl",
+      e.currentTarget,
+      "am1VZPuktoi7yeO5J"
+    )
+      .then(() => alert("Message Sent!"))
+      .catch((err) => console.error("Error:", err));
   };
 
   const handleChange = (e) => {
@@ -169,57 +147,6 @@ const Contact = () => {
                     className="w-full p-4 bg-white/50 border border-stone-200 focus:border-stone-400 focus:outline-none transition-colors duration-300 font-light"
                   />
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-stone-700 font-light uppercase tracking-wider text-xs mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    className="w-full p-4 bg-white/50 border border-stone-200 focus:border-stone-400 focus:outline-none transition-colors duration-300 font-light"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-stone-700 font-light uppercase tracking-wider text-xs mb-2">
-                    Service Interest
-                  </label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full p-4 bg-white/50 border border-stone-200 focus:border-stone-400 focus:outline-none transition-colors duration-300 font-light"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="seo">SEO Excellence</option>
-                    <option value="branding">Personal Branding</option>
-                    <option value="multiple">Multiple Services</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-stone-700 font-light uppercase tracking-wider text-xs mb-2">
-                  Project Budget
-                </label>
-                <select
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  className="w-full p-4 bg-white/50 border border-stone-200 focus:border-stone-400 focus:outline-none transition-colors duration-300 font-light"
-                >
-                  <option value="">Select budget range</option>
-                  <option value="5k-15k">$5,000 - $15,000</option>
-                  <option value="15k-30k">$15,000 - $30,000</option>
-                  <option value="30k-50k">$30,000 - $50,000</option>
-                  <option value="50k+">$50,000+</option>
-                </select>
               </div>
 
               <div>

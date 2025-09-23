@@ -119,8 +119,8 @@ const Home = () => {
 
               <Layout>
                 <Hero />
-                <About />
                 <Services />
+                <About />
                 <Contact />
               </Layout>
 

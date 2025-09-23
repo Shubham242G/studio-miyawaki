@@ -18,9 +18,7 @@ const About = () => {
       <div
         aria-hidden="true"
         className="absolute  left-0 right-0 h-[500px] w-full bg-cover bg-center bg-no-repeat pointer-events-none z-20"
-        style={{
-          backgroundImage: `url('/images/roses.png')`,
-        }}
+        
       />
 
       <div className="relative z-30 max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 py-40">

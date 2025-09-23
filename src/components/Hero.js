@@ -97,6 +97,10 @@ const Hero = () => {
 
         
       </motion.div>
+      <div 
+    className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-stone-50 via-stone-50/70 to-transparent"
+    aria-hidden="true"
+  />
     </section>
   );
 };
