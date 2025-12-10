@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import React from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 // Re-use the same page transition variants
@@ -17,22 +17,18 @@ const pageTransition = {
 const services = [
   { 
     title: "Web Development", 
-    description: "We build digital foundations that are both elegant and enduring. Our websites are crafted with performance, scalability, and artistic integrity at their core, creating a seamless experience for every user.",
     route: "/services/webDevelopment"
   },
   { 
     title: "SEO Optimization", 
-    description: "We elevate your presence, ensuring your voice is heard in the digital echo. Through meticulous strategy and technical precision, we connect your brand with the audience it's meant to reach.",
     route: "/services/seoOptimzation"
   },
   { 
     title: "Personal Branding", 
-    description: "We shape narratives that define legacies. We work with you to distill your unique essence into a compelling digital identity that resonates with authority and authenticity.",
     route: "/services/personalBranding"
   },
   { 
     title: "Performance Management", 
-    description: "Helping companies to increase their productivity",
     route: "/services/performanceManagement"
   }
 ];
@@ -41,7 +37,6 @@ const projects = [
   { title: "MedNLaw", description: "Licensing & legal solutions for medical professionals.", image: "/images/MednLaw.png", link: "https://mednlaw.com/" },
   { title: "Unsaathi", description: "A supportive platform for divorce and legal guidance.", image: "/images/Unsaathi.svg", link: "https://unsaathi.com/" },
   { title: "GSLO", description: "Comprehensive legal services for the modern enterprise.", image: "/images/GSLO.jpg", link: "https://gslo.in/" },
-  // { title: "IAS ki tayyiari", description: "Prepare for the easiest paper in the most difficult way", image: "/images/kumarSir.jpg", link: "https://kumaredutainment.com/" },
 ];
 
 const tileHoverVariants = {
@@ -78,7 +73,7 @@ const textRevealVariants = {
   }),
 };
 
-function ProjectTile({ project, index }) {
+function ProjectTile({ project }) {
   const controls = useAnimation();
 
   return (
@@ -145,7 +140,11 @@ const Services = () => {
 
   return (
     <motion.div
-      initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}
+      initial="initial" 
+      animate="in" 
+      exit="out" 
+      variants={pageVariants} 
+      transition={pageTransition}
       style={{
         backgroundImage: `url('/images/services.jpg')`,
       }}
@@ -159,6 +158,7 @@ const Services = () => {
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#c5a572] to-transparent mx-auto mb-24" />
         </motion.div>
 
+        {/* Services list: only navigation, no description/expansion */}
         <div className="mb-40 bg-stone-50/70 backdrop-blur-sm p-8 sm:p-12 rounded-lg">
           {services.map((service, index) => (
             <div key={index} className="border-b border-stone-300 last:border-b-0">
@@ -167,9 +167,13 @@ const Services = () => {
                 onClick={() => handleServiceClick(service.route)}
                 className="flex justify-between items-center cursor-pointer py-8"
               >
-                <h2 className="text-4xl font-playfair font-light text-stone-800">{service.title}</h2>
+                <h2 className="text-4xl font-playfair font-light text-stone-800">
+                  {service.title}
+                </h2>
                 <motion.div animate={{ rotate: 45 }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19M5 12H19" stroke="#c5a572" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19M5 12H19" stroke="#c5a572" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </motion.div>
               </motion.header>
             </div>
@@ -181,8 +185,8 @@ const Services = () => {
           <div dangerouslySetInnerHTML={{ __html: brushSvgMask }} />
 
           <div className="flex flex-wrap justify-center gap-14 -mt-10">
-            {projects.map((project, index) => (
-              <ProjectTile key={project.title} project={project} index={index} />
+            {projects.map((project) => (
+              <ProjectTile key={project.title} project={project} />
             ))}
           </div>
         </div>
