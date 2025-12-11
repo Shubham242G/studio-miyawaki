@@ -15,10 +15,10 @@ const pageTransition = {
 };
 
 const teamMembers = [
-  { name: "Vatsala Singh", role: "Creative Director", bio: "With 15+ years in digital artistry, Hiroshi guides our vision with Japanese precision and a global perspective.", image: "/images/woman.jpg" },
-  { name: "Manan Kapoor", role: "Content Uploader", bio: "Yuki is the artisan of our digital spaces, weaving code and design into functional, beautiful experiences.", image: "/images/manan.jpg" },
-  { name: "ekampreet paji", role: "Graphic Designer", bio: "Sakura breathes life into brands, blending traditional aesthetics with modern visual narratives.", image: "/images/sikh.jpg" },
-  { name: "Shubham HANDSOME Godiyal", role: "Web Designer", bio: "Kenjiro ensures every project flows in harmony, bridging client vision with our creative process seamlessly.", image: "/images/man.jpg" }
+  { name: "Vatsala Singh", role: "Creative Director", image: "/images/vatsala.jpeg" },
+  { name: "Manan Kapoor", role: "Content Uploader", image: "/images/manan.jpeg" },
+  { name: "ekampreet paji", role: "Graphic Designer", image: "/images/paji.jpeg" },
+  { name: "Shubham HANDSOME Godiyal", role: "Web Designer", image: "/images/shubham.jpeg" }
 ];
 
 const About = () => {
@@ -32,18 +32,15 @@ const About = () => {
       variants={pageVariants}
       transition={pageTransition}
       id="about"
-      // Added bg-fixed for parallax effect. Removed bg-stone-50 as the image is the new background.
       className="relative min-h-screen overflow-hidden py-40 bg-fixed"
       style={{
-  backgroundImage: `url('images/aboutUs.jpg')`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
-  // This creates a parallax effect and helps the browser optimize rendering for a large, static background.
-  backgroundAttachment: 'fixed', 
-  // This ensures the browser prioritizes quality when scaling the image.
-  imageRendering: 'auto'
-}}
+        backgroundImage: `url('images/aboutUs.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        imageRendering: 'auto'
+      }}
     >
       {/* Semi-transparent overlay to ensure text readability over the background image */}
       <div className="absolute inset-0 bg-stone-50/70" />
@@ -114,7 +111,7 @@ const About = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Team Member Navigation */}
+            {/* Team Member Navigation (no description, no expand) */}
             <div className="flex flex-col space-y-4">
               {teamMembers.map((member, index) => (
                 <div
@@ -129,27 +126,14 @@ const About = () => {
                   >
                     {member.name}
                   </motion.h4>
-                  <p className="text-stone-500 font-light uppercase tracking-widest text-xs mb-3">
+                  <p className="text-stone-500 font-light uppercase tracking-widest text-xs mb-1">
                     {member.role}
                   </p>
-                  <AnimatePresence>
-                    {activeTeamMember === index && (
-                      <motion.p 
-                        className="text-stone-600 font-light text-base leading-relaxed"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.4, ease: 'easeInOut' }}
-                      >
-                        {member.bio}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
                 </div>
               ))}
             </div>
 
-            {/* Team Member Display with reduced height */}
+            {/* Team Member Display (photo only) */}
             <div className="lg:col-span-1 relative h-[500px] overflow-hidden rounded-lg">
               <AnimatePresence mode="wait">
                 <motion.div

@@ -42,7 +42,7 @@ const Services = () => {
       ]
     },
     {
-      title: "Personal Branding",
+      title: "Social media Management",
       subtitle: "Digital Identity",
       description: "Comprehensive personal brand development that authentically represents your expertise and values across all digital touchpoints.",
       features: [
@@ -57,7 +57,24 @@ const Services = () => {
         "Visual Development",
         "Launch & Evolution"
       ]
-    }
+    },
+    {
+      title: "Performance Marketing",
+      subtitle: "Digital Visibility",
+      description: "Strategic search engine optimization that combines technical expertise with content mastery to achieve sustainable organic growth.",
+      features: [
+        "Technical Performance Audits",
+        "Content Strategy & Creation",
+        "Local Performance Optimization",
+        "Performance Analytics"
+      ],
+      process: [
+        "Comprehensive Audit",
+        "Strategy Development",
+        "Implementation & Monitoring",
+        "Continuous Optimization"
+      ]
+    },
   ];
 
   const handleContactClick = () => {
