@@ -6,24 +6,21 @@ const About = () => {
   const [activeTeamMember, setActiveTeamMember] = useState(0);
 
   const teamMembers = [
-    { name: "Hiroshi Miyawaki", role: "Founder & Creative Director", bio: "15+ years crafting digital experiences with Japanese precision and global vision.", image: "/team/hiroshi.jpg" },
-    { name: "Yuki Tanaka", role: "Lead Developer", bio: "Full-stack architect specializing in scalable, performance-driven solutions.", image: "/team/yuki.jpg" },
-    { name: "Sakura Watanabe", role: "UX/UI Designer", bio: "Blending traditional Japanese aesthetics with modern user-centered design.", image: "/team/sakura.jpg" }
+    { name: "Vatsala Singh", role: "Creative Director", image: "/images/vatsala.jpg" },
+    { name: "Manan Kapoor", role: "Content Uploader", image: "/images/manan.jpg" },
+    { name: "Ekampreet Singh", role: "Graphic Designer", image: "/images/ekam.jpg" },
+    { name: "Shubham Godiyal", role: "Web Designer", image: "/images/shubham.jpg" }
   ];
 
   return (
-    // The main section is a container for our layers. The base background is now a neutral stone color.
     <section id="about" className="relative overflow-hidden">
-      
       <div
         aria-hidden="true"
-        className="absolute  left-0 right-0 h-[500px] w-full bg-cover bg-center bg-no-repeat pointer-events-none z-20"
-        
+        className="absolute left-0 right-0 h-[500px] w-full bg-cover bg-center bg-no-repeat pointer-events-none z-20"
       />
 
       <div className="relative z-30 max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 py-40">
-        
-        {/* Section Header (Original code, no changes) */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,13 +36,15 @@ const About = () => {
           </h2>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#c5a572] to-transparent mx-auto mb-12" />
           <p className="text-xl text-stone-600 max-w-5xl mx-auto leading-relaxed font-light">
-            Rooted in the Japanese principles of <em className="font-medium text-stone-700">craftsmanship</em>, 
-            <em className="font-medium text-stone-700"> attention to detail</em>, and <em className="font-medium text-stone-700">respect for simplicity</em>, 
+            Rooted in the principles of{" "}
+            <em className="font-medium text-stone-700">craftsmanship</em>, 
+            <em className="font-medium text-stone-700"> attention to detail</em>, and{" "}
+            <em className="font-medium text-stone-700">respect for simplicity</em>, 
             we create digital experiences that resonate deeply while achieving exceptional business results.
           </p>
         </motion.div>
 
-        {/* Philosophy Cards (Original code, no changes) */}
+        {/* Philosophy Cards */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +81,7 @@ const About = () => {
           ))}
         </motion.div>
 
-        {/* Interactive Team Section (Original code, no changes) */}
+        {/* Interactive Team Section */}
         <div className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -98,7 +97,7 @@ const About = () => {
 
           <div className="grid lg:grid-cols-3 gap-16 items-center">
             {/* Team Member Display */}
-            <div className="lg:col-span-2 relative h-[600px] overflow-hidden">
+            <div className="lg:col-span-2 relative h-[520px] overflow-hidden rounded-2xl">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTeamMember}
@@ -118,7 +117,7 @@ const About = () => {
               </AnimatePresence>
             </div>
 
-            {/* Team Member Navigation */}
+            {/* Team Member Navigation (no descriptions) */}
             <div className="flex flex-col space-y-8">
               {teamMembers.map((member, index) => (
                 <div
@@ -133,21 +132,15 @@ const About = () => {
                   >
                     {member.name}
                   </motion.h4>
-                  <p className="text-stone-500 font-light uppercase tracking-wider text-sm mb-3">
+                  <p className="text-stone-500 font-light uppercase tracking-wider text-sm">
                     {member.role}
                   </p>
-                  <motion.p 
-                    className="text-stone-600 font-light text-base leading-relaxed h-16"
-                    animate={{ opacity: activeTeamMember === index ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {member.bio}
-                  </motion.p>
-                  <div className="h-px mt-4"
-                       style={{
-                         width: '100%',
-                         background: 'linear-gradient(to right, #e7e5e4, #d6d3d1, #e7e5e4)'
-                       }}
+                  <div
+                    className="h-px mt-4"
+                    style={{
+                      width: '100%',
+                      background: 'linear-gradient(to right, #e7e5e4, #d6d3d1, #e7e5e4)'
+                    }}
                   >
                     <motion.div
                       className="h-full"

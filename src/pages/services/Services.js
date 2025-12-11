@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 // Re-use the same page transition variants
@@ -17,41 +17,66 @@ const pageTransition = {
 const services = [
   { 
     title: "Web Development", 
-    route: "/services/webDevelopment"
+    description: "We build digital foundations that are both elegant and enduring. Our websites are crafted with performance, scalability, and artistic integrity at their core, creating a seamless experience for every user.",
+    route: "/services/webDevelopment" 
   },
   { 
     title: "SEO Optimization", 
-    route: "/services/seoOptimzation"
+    description: "We elevate your presence, ensuring your voice is heard in the digital echo. Through meticulous strategy and technical precision, we connect your brand with the audience it's meant to reach.",
+    route: "/services/seoOptimzation" 
   },
   { 
     title: "Personal Branding", 
-    route: "/services/personalBranding"
+    description: "We shape narratives that define legacies. We work with you to distill your unique essence into a compelling digital identity that resonates with authority and authenticity.",
+    route: "/services/personalBranding" 
   },
   { 
     title: "Performance Management", 
-    route: "/services/performanceManagement"
+    description: "Helping companies to increase their productivity",
+    route: "/services/performanceManagement" 
   }
 ];
 
 const projects = [
-  { title: "MedNLaw", description: "Licensing & legal solutions for medical professionals.", image: "/images/MednLaw.png", link: "https://mednlaw.com/" },
-  { title: "Unsaathi", description: "A supportive platform for divorce and legal guidance.", image: "/images/Unsaathi.svg", link: "https://unsaathi.com/" },
-  { title: "GSLO", description: "Comprehensive legal services for the modern enterprise.", image: "/images/GSLO.jpg", link: "https://gslo.in/" },
+  { 
+    title: "MedNLaw", 
+    description: "Licensing & legal solutions for medical professionals.", 
+    image: "/images/MednLaw.png", 
+    link: "https://mednlaw.com/" 
+  },
+  { 
+    title: "Unsaathi", 
+    description: "A supportive platform for divorce and legal guidance.", 
+    image: "/images/Unsaathi-logo1.png", 
+    link: "https://unsaathi.com/" 
+  },
+  { 
+    title: "GSLO", 
+    description: "Comprehensive legal services for the modern enterprise.", 
+    image: "/images/GSLO.jpg", 
+    link: "https://gslo.in/" 
+  },
+  { 
+    title: "Gaurav Sharma", 
+    description: "A personal hub for legal expertise and thought leadership.", 
+    image: "/images/gaurav-sharma-white.png",   // keep this path consistent with your assets
+    link: "https://gauravsharma.org/" 
+  },
 ];
 
 const tileHoverVariants = {
   rest: {
     rotateX: 0,
     rotateY: 0,
-    boxShadow: "0 20px 25px rgba(0,0,0,0.15)",
+    boxShadow: "0 25px 50px rgba(0,0,0,0.2)",
     scale: 1,
   },
   hover: {
-    rotateX: 10,
-    rotateY: 10,
-    boxShadow: "0 40px 50px rgba(0,0,0,0.35)",
-    scale: 1.1,
-    transition: { type: "spring", stiffness: 150, damping: 20 }
+    rotateX: 5,
+    rotateY: 5,
+    boxShadow: "0 40px 80px rgba(197, 165, 114, 0.25)",
+    scale: 1.02,
+    transition: { type: "spring", stiffness: 300, damping: 25 }
   }
 };
 
@@ -65,47 +90,64 @@ const brushSvgMask = `
 </svg>`;
 
 const textRevealVariants = {
-  hidden: { opacity: 0, x: -40 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i) => ({
     opacity: 1,
-    x: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" },
+    y: 0,
+    transition: { delay: i * 0.12, duration: 0.6, ease: "easeOut" },
   }),
 };
 
-function ProjectTile({ project }) {
+function ProjectTile({ project, index }) {
   const controls = useAnimation();
 
   return (
-    <motion.div
-      className="w-72 h-96 bg-gradient-to-tr from-indigo-900/80 via-indigo-800/70 to-indigo-900/90 rounded-3xl cursor-pointer relative overflow-hidden shadow-lg"
-      variants={tileHoverVariants}
-      initial="rest"
-      whileHover="hover"
-      animate={controls}
-      style={{
-        perspective: 1200,
-        WebkitMaskImage: "url(#brush-mask)",
-        maskImage: "url(#brush-mask)",
-        WebkitMaskRepeat: 'no-repeat',
-        maskRepeat: 'no-repeat'
-      }}
-      onHoverStart={() => controls.start("hover")}
-      onHoverEnd={() => controls.start("rest")}
-    >
-      <img
-        src={project.image}
-        alt={project.title}
-        className="absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-700 group-hover:opacity-90"
-      />
+    <div className="flex flex-col items-center group cursor-pointer">
+      <motion.div
+  className="w-64 h-64 lg:w-72 lg:h-72 bg-gradient-to-br from-indigo-900/90 via-indigo-800/80 to-indigo-900/90 rounded-2xl relative overflow-hidden shadow-2xl backdrop-blur-sm border border-white/10 mb-6 hover:mb-8 transition-all duration-300"
+  variants={tileHoverVariants}
+  initial="rest"
+  whileHover="hover"
+  animate={controls}
+>
+  <img
+    src={project.image}
+    alt={project.title}
+    className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-all duration-700 ease-out"
+  />
 
-      <motion.div className="absolute bottom-10 left-6 right-6 text-white z-20">
+  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+  <motion.div
+    className="absolute inset-0 bg-gradient-to-r from-[#c5a572]/0 via-[#c5a572]/10 to-[#c5a572]/0"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 0.2 }}
+    transition={{ duration: 0.4 }}
+  />
+
+  <a
+    href={project.link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="absolute inset-0 z-30"
+    aria-label={`Open link to ${project.title}`}
+  />
+</motion.div>
+
+
+      {/* Text content below card */}
+      <motion.div 
+        className="text-center text-white max-w-xs"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 + index * 0.1 }}
+      >
         <motion.h3
           custom={0}
           variants={textRevealVariants}
           initial="hidden"
           animate="visible"
-          className="text-3xl font-bold tracking-wider drop-shadow-lg font-playfair select-none"
+          className="text-2xl lg:text-3xl font-light tracking-widest drop-shadow-xl font-playfair mb-2 group-hover:text-[#c5a572] transition-colors duration-500"
         >
           {project.title}
         </motion.h3>
@@ -114,22 +156,15 @@ function ProjectTile({ project }) {
           variants={textRevealVariants}
           initial="hidden"
           animate="visible"
-          className="mt-2 text-sm font-light drop-shadow-sm leading-relaxed pointer-events-none"
+          className="text-sm lg:text-base font-light drop-shadow-lg leading-relaxed line-clamp-2"
         >
           {project.description}
         </motion.p>
       </motion.div>
-
-      <a
-        href={project.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute inset-0 z-30"
-        aria-label={`Open link to ${project.title}`}
-      />
-    </motion.div>
+    </div>
   );
 }
+
 
 const Services = () => {
   const navigate = useNavigate();
@@ -140,14 +175,12 @@ const Services = () => {
 
   return (
     <motion.div
-      initial="initial" 
-      animate="in" 
-      exit="out" 
-      variants={pageVariants} 
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
       transition={pageTransition}
-      style={{
-        backgroundImage: `url('/images/services.jpg')`,
-      }}
+      style={{ backgroundImage: `url('/images/services.jpg')` }}
       className="min-h-screen bg-cover bg-center bg-fixed py-40 px-8 sm:px-12 lg:px-16 relative"
     >
       <div className="absolute inset-0 bg-black/30"></div>
@@ -158,7 +191,6 @@ const Services = () => {
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#c5a572] to-transparent mx-auto mb-24" />
         </motion.div>
 
-        {/* Services list: only navigation, no description/expansion */}
         <div className="mb-40 bg-stone-50/70 backdrop-blur-sm p-8 sm:p-12 rounded-lg">
           {services.map((service, index) => (
             <div key={index} className="border-b border-stone-300 last:border-b-0">
@@ -183,14 +215,13 @@ const Services = () => {
         <div className="relative max-w-7xl mx-auto mb-40">
           {/* Inject SVG mask in DOM for mask usage */}
           <div dangerouslySetInnerHTML={{ __html: brushSvgMask }} />
-
-          <div className="flex flex-wrap justify-center gap-14 -mt-10">
-            {projects.map((project) => (
-              <ProjectTile key={project.title} project={project} />
+          
+          <div className="flex flex-wrap justify-center gap-12 lg:gap-16 -mt-10">
+            {projects.map((project, index) => (
+              <ProjectTile key={project.title} project={project} index={index} />
             ))}
           </div>
         </div>
-
       </div>
     </motion.div>
   );

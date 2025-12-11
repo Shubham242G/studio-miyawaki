@@ -12,6 +12,7 @@ import WebDevelopment from './pages/services/WebDevelopment';
 import PersonalBranding from './pages/services/PersonalBranding';
 import SEOOptimization from './pages/services/SeoOptimzation';
 import PerformanceManagement from './pages/services/PerformanceManagement';
+import FloatingWhatsApp from './components/Whatsapp';
 
 function App() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function App() {
           <Route path="/services/performanceManagement" element={<PerformanceManagement />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+        <FloatingWhatsApp/>
       </AnimatePresence>
     </HelmetProvider>
   );
