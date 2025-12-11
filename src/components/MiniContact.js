@@ -94,10 +94,15 @@ const Contact = () => {
                 <div className="w-12 h-12 bg-stone-100 border border-stone-200 flex items-center justify-center">
                   <span className="text-stone-600">🌐</span>
                 </div>
-                <div>
+                {/* <div>
                   <p className="text-stone-500 font-light uppercase tracking-wider text-xs">Location</p>
                   <p className="text-stone-800 font-light">Tokyo, Japan</p>
-                </div>
+                </div> */}
+
+                <div className="flex items-center gap-2">
+
+  <p className="text-stone-800 font-light">+91 8354907784</p>
+</div>
               </div>
               
               <div className="flex items-center space-x-4">
