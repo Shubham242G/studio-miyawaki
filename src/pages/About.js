@@ -15,10 +15,10 @@ const pageTransition = {
 };
 
 const teamMembers = [
-  { name: "Vatsala Singh", role: "Creative Director", image: "/images/vatsala.jpeg" },
-  { name: "Manan Kapoor", role: "Content Uploader", image: "/images/manan.jpeg" },
-  { name: "ekampreet paji", role: "Graphic Designer", image: "/images/paji.jpeg" },
-  { name: "Shubham HANDSOME Godiyal", role: "Web Designer", image: "/images/shubham.jpeg" }
+  { name: "Vatsala Singh", role: "Creative Director", image: "/images/vatsala.jpg" },
+  { name: "Manan Kapoor", role: "Content Uploader", image: "/images/manan.jpg" },
+  { name: "Ekampreet Singh", role: "Graphic Designer", image: "/images/ekam.jpg" },
+  { name: "Shubham Godiyal", role: "Web Designer", image: "/images/shubham.jpg" }
 ];
 
 const About = () => {
