@@ -64,11 +64,11 @@ const Contact = () => {
             <p className="font-light">
               <span className="font-medium">Email:</span>{' '}
               <a href="mailto:hiroshi@studiomiyawaki.com" className="underline underline-offset-2">
-                hiroshi@studiomiyawaki.com
+                connect.studiomiyawaki@gmail.com
               </a>
             </p>
             <p className="font-light">
-              <span className="font-medium">Location:</span> Ginza, Tokyo, Japan
+              <span className="font-medium">Phone:</span> +91 8354907784
             </p>
           </div>
         </motion.div>
