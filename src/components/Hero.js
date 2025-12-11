@@ -85,7 +85,7 @@ const Hero = () => {
         animate="visible"
         className="relative z-10 text-center px-8 sm:px-12 lg:px-16 max-w-6xl mx-auto"
       >
-        <motion.div variants={itemVariants} className="mb-[200px]">
+        <motion.div variants={itemVariants} className="mb-[100px]">
           <span className="text-7xl font-light text-red-500 tracking-wider font-noto-jp">美</span>
         </motion.div>
         
