@@ -53,8 +53,7 @@ const Footer = () => {
               Contact
             </h4>
             <div className="space-y-3">
-              <p className="text-stone-400 font-light">hello@studiomiyawaki.com</p>
-              <p className="text-stone-400 font-light">Tokyo, Japan</p>
+              <p className="text-stone-400 font-light">www.@studiomiyawaki.com</p>
               <p className="text-stone-400 font-light">Response within 24 hours</p>
             </div>
           </div>

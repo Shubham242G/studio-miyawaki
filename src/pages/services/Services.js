@@ -47,7 +47,7 @@ const projects = [
   { 
     title: "Unsaathi", 
     description: "A supportive platform for divorce and legal guidance.", 
-    image: "/images/Unsaathi-logo1.png", 
+    image: "/images/unsaathi.png", 
     link: "https://unsaathi.com/" 
   },
   { 
@@ -59,7 +59,7 @@ const projects = [
   { 
     title: "Gaurav Sharma", 
     description: "A personal hub for legal expertise and thought leadership.", 
-    image: "/images/gaurav-sharma-white.png",   // keep this path consistent with your assets
+    image: "/images/gaurav-sharma-white.png",
     link: "https://gauravsharma.org/" 
   },
 ];
@@ -104,36 +104,35 @@ function ProjectTile({ project, index }) {
   return (
     <div className="flex flex-col items-center group cursor-pointer">
       <motion.div
-  className="w-64 h-64 lg:w-72 lg:h-72 bg-gradient-to-br from-indigo-900/90 via-indigo-800/80 to-indigo-900/90 rounded-2xl relative overflow-hidden shadow-2xl backdrop-blur-sm border border-white/10 mb-6 hover:mb-8 transition-all duration-300"
-  variants={tileHoverVariants}
-  initial="rest"
-  whileHover="hover"
-  animate={controls}
->
-  <img
-    src={project.image}
-    alt={project.title}
-    className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-all duration-700 ease-out"
-  />
+        className="w-64 h-64 lg:w-72 lg:h-72 bg-gradient-to-br from-indigo-900/90 via-indigo-800/80 to-indigo-900/90 rounded-2xl relative overflow-hidden shadow-2xl backdrop-blur-sm border border-white/10 mb-6 hover:mb-8 transition-all duration-300"
+        variants={tileHoverVariants}
+        initial="rest"
+        whileHover="hover"
+        animate={controls}
+      >
+        <img
+          src={project.image}
+          alt={project.title}
+          className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-all duration-700 ease-out"
+        />
 
-  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-  <motion.div
-    className="absolute inset-0 bg-gradient-to-r from-[#c5a572]/0 via-[#c5a572]/10 to-[#c5a572]/0"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 0.2 }}
-    transition={{ duration: 0.4 }}
-  />
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-[#c5a572]/0 via-[#c5a572]/10 to-[#c5a572]/0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.2 }}
+          transition={{ duration: 0.4 }}
+        />
 
-  <a
-    href={project.link}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="absolute inset-0 z-30"
-    aria-label={`Open link to ${project.title}`}
-  />
-</motion.div>
-
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0 z-30"
+          aria-label={`Open link to ${project.title}`}
+        />
+      </motion.div>
 
       {/* Text content below card */}
       <motion.div 
@@ -165,7 +164,6 @@ function ProjectTile({ project, index }) {
   );
 }
 
-
 const Services = () => {
   const navigate = useNavigate();
 
@@ -186,12 +184,16 @@ const Services = () => {
       <div className="absolute inset-0 bg-black/30"></div>
       <div className="max-w-7xl mx-auto relative z-10">
 
+        {/* Hero */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-          <h1 className="text-7xl font-playfair text-center font-light text-stone-50 mb-8">Our Craft</h1>
+          <h1 className="text-7xl font-playfair text-center font-light text-stone-50 mb-8">
+            Our Craft
+          </h1>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#c5a572] to-transparent mx-auto mb-24" />
         </motion.div>
 
-        <div className="mb-40 bg-stone-50/70 backdrop-blur-sm p-8 sm:p-12 rounded-lg">
+        {/* Services list */}
+        <div className="mb-40 bg-stone-50/70 backdrop-blur-sm p-8 sm:px-12 sm:py-12 rounded-lg">
           {services.map((service, index) => (
             <div key={index} className="border-b border-stone-300 last:border-b-0">
               <motion.header
@@ -212,16 +214,92 @@ const Services = () => {
           ))}
         </div>
 
-        <div className="relative max-w-7xl mx-auto mb-40">
-          {/* Inject SVG mask in DOM for mask usage */}
-          <div dangerouslySetInnerHTML={{ __html: brushSvgMask }} />
-          
-          <div className="flex flex-wrap justify-center gap-12 lg:gap-16 -mt-10">
-            {projects.map((project, index) => (
-              <ProjectTile key={project.title} project={project} index={index} />
-            ))}
-          </div>
-        </div>
+        {/* Projects section – subtle, animated, integrated */}
+        <section className="relative max-w-7xl mx-auto mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-4xl font-playfair font-light text-stone-50 mb-3">
+              Selected Projects
+            </h2>
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-[#c5a572] to-transparent mx-auto" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-stone-900/65 backdrop-blur-md border border-white/10 rounded-3xl px-6 sm:px-10 py-8"
+          >
+            <div className="grid gap-6 md:grid-cols-2">
+              {projects.map((project, index) => (
+                <motion.a
+                  key={project.title}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex gap-4 items-center"
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.25, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ y: -2 }}
+                >
+                  {/* Thumbnail */}
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 shadow-md border border-white/10 bg-indigo-900/40">
+                    <motion.img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-60 group-hover:opacity-35 transition-opacity duration-200" />
+                  </div>
+
+                  {/* Text */}
+                  <div className="flex-1">
+                    <h3 className="text-base sm:text-lg font-playfair font-light text-stone-50 mb-1 group-hover:text-[#c5a572] transition-colors duration-200">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-stone-200/90 leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Subtle arrow */}
+                  <motion.div
+                    className="hidden sm:flex items-center text-stone-300 group-hover:text-[#c5a572]"
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 3 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5 12H19M13 6L19 12L13 18"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </motion.div>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        </section>
       </div>
     </motion.div>
   );
